@@ -11,7 +11,7 @@ class Player:
         return 'rock'
     def learn(self, my_move, their_move):
         return my_move, their_move
-    def beats(self, one, two):3
+    def beats(self, one, two):
             p1_score = 0
             p2_score = 0
         if one == two:
