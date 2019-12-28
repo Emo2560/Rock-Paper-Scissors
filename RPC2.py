@@ -45,11 +45,11 @@ class ReflectPlayer(Player):
         else:
             return self.their_move
 
-class CyclerPlayer(Player):
-    def move(self):
+class Cycler(Player):
+    def move(self, my_move, their_move):
         if my_move == "rock":
             return "paper"
-        elif my_move == "papaer":
+        elif my_move == "paper":
             return "scissors"
         elif my_move == "scissors":
             return "rock"
