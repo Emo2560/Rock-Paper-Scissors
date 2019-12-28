@@ -6,6 +6,7 @@ in this game"""
 """This program plays a game of Rock, Paper, Scissors between two Players,
 and reports both Player's scores each round."""
 
+
 import random
 moves = ['rock', 'paper', 'scissors']
 
@@ -28,50 +29,53 @@ class Player:
             print("Player one won this round")
             p1s += 1
             print(p1s, p2s)
-            return p1s, p2s
         else:
             print("Player two won this round")
             p2s += 1
             print(p1s, p2s)
-            return p2s, p2s
         return p1s, p2s
+     
 class Human(Player):
     def move(self):
-        my_move = input("What is your rock, paper, or scissors?").lower()
+        my_move = input("What is your Play?").lower()
         while my_move not in moves:
             my_move = input("Your move has to be either rock, paper or scissors.")
         return my_move
-                
 class RandomPlayer(Player):
     def move(self):
         return random.choice(moves)
-    
-class ReflectPlayer(Player):
-    def __init__(self):
-        Player.__init__(self)
-        self.their_move = None
-     
-    def play(self):
+
+class ReflectPlayer(Player): 
+    def move(self):
         if self.their_move == "None":
             return random.choice(moves)
         else:
             return self.their_move
-class Cycle(Player):
+class Cycler(Player):
+    def __init__(self,):
+        self.my_move = None
     def move(self):
         if self.my_move is None:
-            return random.choice(moves)
-        index = moves.index(self.my_move) + 1
-        if index % len(moves) == 0:
-            index = 0
-        return moves[index]
+            self.my_move = random.choice(moves)
+            return self.my_move
+        elif self.my_move == "rock":
+            self.my_move = "paper"
+            return self.my_move
+        elif self.my_move == "paper":
+            self.my_move = "scissors"
+            return self.my_move
+        else:
+            self.my_move = "rock"
+            return self.my_move 
+        
     def learn(self, my_move, their_move):
-        self.my_move = my_move
-
+        pass
+        
+                
 class Game:
     def __init__(self, p1, p2):
         self.p1 = p1
         self.p2 = p2
-        # global p1s, p2s
         self.p1s = 0
         self.p2s = 0
     def play_round(self):
@@ -94,51 +98,11 @@ class Game:
             print("Player 2 one the game, congratulations!!")
         else:
             print("It's a draw...")
-      
 
     print ("Player: " + str(my_move))
     print ("Computer: " + str(their_move))
-
-    def game_selection(self):
-        while True:
-                select = int(input("Select the strategy "
-                "you want to play against:  "
-                "1 - Rock Player "
-                "2 - Random Player "
-                "3 - Cycle Player "
-                "4 - Reflect Player: "))
-                if select == 1:
-                    selection = "Player()"
-                elif select == 2:
-                    selection == "RandomPlayer()"
-                elif select == 3:
-                    selection = "CyclePlayer()"
-                else:
-                    selection = "ReflectPlayer()"
- 
-                print("!!!", selection)
-                if select not in range (1,4):
-                    print("Error - Please select a # 1-4.")
- 
-                    continue
-                return selection
-                
-
-
-
             
 if __name__ == '__main__':
-    d = {
-         1: Player(),
-         2: RandomPlayer(),
-         3: Human(),
-         4: Cycle()
-    }
-    chooseplayer = int(input("Choose your player: 1, 2, 3 or 4\n"))
-    opponent = d[chooseplayer]
-    you = Human()
-
-
-   
-    game = Game(Human(), RandomPlayer())
+    game = Game(Human(), Cycler())
     game.play_game()
+
