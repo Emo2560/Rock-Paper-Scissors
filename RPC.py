@@ -18,26 +18,13 @@ class Player:
         return 'rock'
     def learn(self, my_move, their_move):
         return my_move, their_move
-    def beats(self, one, two):
-        p1s = 0
-        p2s = 0
-        if one == two:
-            print("It's a tie!")
-        elif ((one == 'rock' and two == 'scissors') or
+def beats(one, two):
+    return ((one == 'rock' and two == 'scissors') or
             (one == 'scissors' and two == 'paper') or
-            (one == 'paper' and two == 'rock')):
-            print("Player one won this round")
-            p1s += 1
-            print(p1s, p2s)
-        else:
-            print("Player two won this round")
-            p2s += 1
-            print(p1s, p2s)
-        return p1s, p2s
-     
+            (one == 'paper' and two == 'rock'))
 class Human(Player):
     def move(self):
-        my_move = input("What is your Play?").lower()
+        my_move = input("What is your Play rock, paper, scissors?").lower()
         while my_move not in moves:
             my_move = input("Your move has to be either rock, paper or scissors.")
         return my_move
@@ -47,10 +34,10 @@ class RandomPlayer(Player):
 
 class ReflectPlayer(Player): 
     def move(self):
-        if self.their_move == "None":
+        if self.their_move is None:
             return random.choice(moves)
-        else:
-            return self.their_move
+        return self.their_move
+        
 class Cycler(Player):
     def __init__(self,):
         self.my_move = None
@@ -73,31 +60,52 @@ class Cycler(Player):
         
                 
 class Game:
+    p1_score = 0
+    p2_score = 0
     def __init__(self, p1, p2):
         self.p1 = p1
         self.p2 = p2
-        self.p1s = 0
-        self.p2s = 0
+                
     def play_round(self):
         move1 = self.p1.move()
         move2 = self.p2.move()
-        print(f"Player 1: {move1}  Player 2: {move2}")
-        self.p1.learn(move1, move2)
-        self.p2.learn(move2, move1)
-        self.p1.beats(move1, move2)
+        #self.p2.learn(move1,move2)
+        #self.p2.learn(move2,move1)
+        print(f"Player 1: {move1}")
+        print(f"Player 2: {move2}")
+        if beats(move1, move2):
+            self.p1_score += 1
+            print("Player 1 won!")
+        elif beats(move2, move1):
+            self.p2_score += 1
+            print("Player 2 won!")
+        else:
+            print("Tie!!!")
+        print("Current scores: ")
+        print(f"Player 1: {self.p1_score}")
+        print(f"Player 2: {self.p2_score}")
+
+
+
+        
     def play_game(self):
         print("Game start!")
-        rounds = int(input("Do you feel luck? How many rounds do you want to play?"))
-        for round in range(rounds):
-            print(f"Round {round}:")
+        for round in [1, 2, 3]:
+            print(f"Round{round}:")
             self.play_round()
-        print(f"The score is {self.p1s} to {self.p2s}")
-        if self.p1s > self.p2s:
-            print("Player 1 one the game, congratulations!!")
-        elif self.p1s < self.p2s:
-            print("Player 2 one the game, congratulations!!")
-        else:
-            print("It's a draw...")
+        print("General scores:")
+        print(f"Final score: Player 1: {self.p1_score}\tPlayer 2: {self.p2_score}")
+        
+        #print(f"Player 1: {self.p1_score}")
+        #print(f"Player 2: {self.p2_score}")
+        #if self.p1_score < self.p2_score:
+            #print("Player 2 won ")
+        #elif self.p1_score > self.p2_score:
+            #print("Player 1 won")
+        #else:
+            #print("TIE")
+        print("Game over")
+        
 
     print ("Player: " + str(my_move))
     print ("Computer: " + str(their_move))
