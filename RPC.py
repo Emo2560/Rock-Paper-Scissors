@@ -84,10 +84,7 @@ class Game:
         print("Current scores: ")
         print(f"Player 1: {self.p1_score}")
         print(f"Player 2: {self.p2_score}")
-
-
-
-        
+      
     def play_game(self):
         print("Game start!")
         for round in [1, 2, 3]:
@@ -96,16 +93,7 @@ class Game:
         print("General scores:")
         print(f"Final score: Player 1: {self.p1_score}\tPlayer 2: {self.p2_score}")
         
-        #print(f"Player 1: {self.p1_score}")
-        #print(f"Player 2: {self.p2_score}")
-        #if self.p1_score < self.p2_score:
-            #print("Player 2 won ")
-        #elif self.p1_score > self.p2_score:
-            #print("Player 1 won")
-        #else:
-            #print("TIE")
-        print("Game over")
-        
+                
 
     print ("Player: " + str(my_move))
     print ("Computer: " + str(their_move))
