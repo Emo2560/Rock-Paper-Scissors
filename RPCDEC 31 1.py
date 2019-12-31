@@ -1,4 +1,3 @@
-
 import random
 moves = ['rock', 'paper', 'scissors']
 
@@ -9,10 +8,6 @@ their_move = None
 class Player:
     def move(self):
         return 'rock'
-
-
-def learn(self, my_move, their_move):
-        return my_move, their_move
 
 
 def beats(one, two):
@@ -36,7 +31,7 @@ class RandomPlayer(Player):
 
 class ReflectPlayer(Player):
     def move(self):
-        if self.their_move is None:
+        if self.their_move == "None":
             return random.choice(moves)
         else:
             return self.their_move
@@ -64,10 +59,6 @@ def move(self):
         else:
             self.my_move = "rock"
             return self.my_move
-
-
-def learn(self, my_move, their_move):
-        pass
 
 
 class Game:
@@ -111,5 +102,5 @@ def play_game(self):
         print ("Computer: " + str(their_move))
 
 if __name__ == '__main__':
-    game = Game(Human(), Cycler())
+    game = Game(Human(), RandomPlayer())
     game.play_game()
