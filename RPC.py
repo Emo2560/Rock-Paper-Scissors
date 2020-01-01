@@ -1,18 +1,14 @@
 import random
 moves = ['rock', 'paper', 'scissors']
 
+my_move = 0
+their_move = 0
+
 
 class Player:
-    my_move = None
-    their_move = None
 
-
-def move(self):
-        pass
-
-
-def learn(self, my_move, their_move):
-        pass
+    def move(self):
+        return 'rock'
 
 
 def beats(one, two):
@@ -25,7 +21,7 @@ class Human(Player):
     def move(self):
         my_move = input("What is your Play rock, paper, scissors?").lower()
         while my_move not in moves:
-        my_move = input("Your move has to be either rock, paper or scissors.")
+            my_move = input("Your move has to be either rock, paper or scissors.")
         return my_move
 
 
@@ -38,9 +34,10 @@ class ReflectPlayer(Player):
     def move(self):
         if self.their_move is None:
             return random.choice(moves)
-        return self.their_move
+        else:
+            return self.their_move
 
-    def learn(self, my_move, their_move):
+    def learn(self, their_move):
         self.their_move = their_move
 
 
@@ -90,16 +87,19 @@ class Game:
 
     def play_game(self):
         print("Game start!")
-        for round in [1, 2, 3]:
+        for round in [3]:
             print(f"Round{round}:")
             self.play_round()
         print("General scores:")
-    print(f"Final score: Player 1: {self.p1_score}\tPlayer 2: {self.p2_score}")
-    print("Game over")
+        print(f"Final score: Player 1: {self.p1_score}\tPlayer 2: {self.p2_score}")
+        print("Game over")
+    print ("Player: " + str(my_move))
+    print ("Computer: " + str(their_move))
 
 if __name__ == '__main__':
     game = Game(Human(), Cycler())
     game.play_game()
+
 
 a = "The last line of code, and below is a new blank line!"
 
