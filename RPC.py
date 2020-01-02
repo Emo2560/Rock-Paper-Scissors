@@ -98,7 +98,7 @@ class Game:
             print(f"Round{round}:")
             self.play_round()
         print("General scores:")
-        print(f"Final score: Player 1: {self.p1_score}\tPlayer 2: {self.p2_score}")
+        print(f"Final score:Player1: {self.p1_score}\tPlayer2:{self.p2_score}")
         print("Game over")
     print ("Player: " + str(my_move))
     print ("Computer: " + str(their_move))
@@ -109,6 +109,7 @@ if __name__ == '__main__':
 
 
 a = "The last line of code, and below is a new blank line!"
+
 
 
 
