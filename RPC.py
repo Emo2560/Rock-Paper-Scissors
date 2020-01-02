@@ -1,4 +1,11 @@
 import random
+"""The Player class is the parent class for all of the Players
+in this game"""
+
+"""This program plays a game of Rock, Paper, Scissors between two Players,
+and reports both Player's scores each round."""
+
+
 moves = ['rock', 'paper', 'scissors']
 
 my_move = 0
@@ -21,7 +28,7 @@ class Human(Player):
     def move(self):
         my_move = input("What is your Play rock, paper, scissors?").lower()
         while my_move not in moves:
-            my_move = input("Your move has to be either rock, paper or scissors.")
+            my_move = input("Play either rock, paper or scissors.")
         return my_move
 
 
@@ -37,7 +44,7 @@ class ReflectPlayer(Player):
         else:
             return self.their_move
 
-    def learn(self, their_move):
+    def learn(self, my_move, their_move):
         self.their_move = their_move
 
 
@@ -87,7 +94,7 @@ class Game:
 
     def play_game(self):
         print("Game start!")
-        for round in [3]:
+        for round in range(3):
             print(f"Round{round}:")
             self.play_round()
         print("General scores:")
